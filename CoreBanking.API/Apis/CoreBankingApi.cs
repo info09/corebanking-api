@@ -26,7 +26,7 @@ namespace CoreBanking.API.Apis
             return endpoints;
         }
 
-        private static async Task<Results<Ok<Account>, BadRequest>> Transfer([AsParameters] CoreBankingServices services, Guid id, TransferRequest request)
+        public static async Task<Results<Ok<Account>, BadRequest>> Transfer([AsParameters] CoreBankingServices services, Guid id, TransferRequest request)
         {
             if (id == Guid.Empty)
             {
@@ -103,7 +103,7 @@ namespace CoreBanking.API.Apis
             }
         }
 
-        private static async Task<Results<Ok<Account>, BadRequest>> WithDraw([AsParameters] CoreBankingServices services, Guid id, WithdrawalRequest request)
+        public static async Task<Results<Ok<Account>, BadRequest>> WithDraw([AsParameters] CoreBankingServices services, Guid id, WithdrawalRequest request)
         {
             if (id == Guid.Empty)
             {
@@ -155,7 +155,7 @@ namespace CoreBanking.API.Apis
             }
         }
 
-        private static async Task<Results<Ok<Account>, BadRequest>> Deposit([AsParameters] CoreBankingServices services, Guid id, DepositionRequest request)
+        public static async Task<Results<Ok<Account>, BadRequest>> Deposit([AsParameters] CoreBankingServices services, Guid id, DepositionRequest request)
         {
             if (id == Guid.Empty)
             {
@@ -202,7 +202,7 @@ namespace CoreBanking.API.Apis
 
         }
 
-        private static async Task<Ok<PaginationResponse<Account>>> GetAccounts([AsParameters] CoreBankingServices services, [AsParameters] PaginationRequest pagination, Guid? customerId)
+        public static async Task<Ok<PaginationResponse<Account>>> GetAccounts([AsParameters] CoreBankingServices services, [AsParameters] PaginationRequest pagination, Guid? customerId)
         {
             var account = services.Context.Accounts.AsQueryable();
             if (customerId.HasValue)
@@ -221,7 +221,7 @@ namespace CoreBanking.API.Apis
                                     );
         }
 
-        private static async Task<Results<Ok<Account>, BadRequest>> CreateAccounts([AsParameters] CoreBankingServices services, Account account)
+        public static async Task<Results<Ok<Account>, BadRequest>> CreateAccounts([AsParameters] CoreBankingServices services, Account account)
         {
             if (account.CustomerId == Guid.Empty)
             {
@@ -241,7 +241,7 @@ namespace CoreBanking.API.Apis
             return TypedResults.Ok(account);
         }
 
-        private static async Task<Results<Ok<Customer>, BadRequest>> CreateCustomers([AsParameters] CoreBankingServices services, Customer customer)
+        public static async Task<Results<Ok<Customer>, BadRequest>> CreateCustomers([AsParameters] CoreBankingServices services, Customer customer)
         {
             if (string.IsNullOrEmpty(customer.Name))
             {
@@ -261,7 +261,7 @@ namespace CoreBanking.API.Apis
             return TypedResults.Ok(customer);
         }
 
-        private static async Task<Ok<PaginationResponse<Customer>>> GetCustomers([AsParameters] PaginationRequest pagination, [AsParameters] CoreBankingServices services)
+        public static async Task<Ok<PaginationResponse<Customer>>> GetCustomers([AsParameters] PaginationRequest pagination, [AsParameters] CoreBankingServices services)
         {
             return TypedResults.Ok(new PaginationResponse<Customer>
                 (
